@@ -2,49 +2,49 @@
 add-type -assembly 'PresentationCore';
 
 function Copy-Tiff2Tiff {
-	<#
-		.Synopsis
-		    "Исправляет" одностраничные TIFF файлы после mdi
-		.Description
-		    "Исправляет" одностраничные TIFF файлы после mdi
-		.Parameter sourceFile
-		    Исходный .tiff файл (объект).
-		.Parameter destination
-			Полный путь (к папке), в который будет сохранён полученный .tiff файл.
+    <#
+        .Synopsis
+            "Исправляет" одностраничные TIFF файлы после mdi
+        .Description
+            "Исправляет" одностраничные TIFF файлы после mdi
+        .Parameter sourceFile
+            Исходный .tiff файл (объект).
+        .Parameter destination
+            Полный путь (к папке), в который будет сохранён полученный .tiff файл.
             Если параметр не указан, будет создан файл с тем же именем, но с расширением .tiff
             в каталоге исходного файла
-		.Parameter newName
+        .Parameter newName
             Имя создаваемого файла.
-			Если параметр не указан, будет создан файл с тем же именем, но с расширением .tiff
-		.Example
-			Обработка файлов в каталоге с сохранением tiff файлов в тот же каталог:
-			dir 'c:\temp\*.tif' | Convert-TIFF2TIFF
-	#>
+            Если параметр не указан, будет создан файл с тем же именем, но с расширением .tiff
+        .Example
+            Обработка файлов в каталоге с сохранением tiff файлов в тот же каталог:
+            dir 'c:\temp\*.tif' | Convert-TIFF2TIFF
+    #>
     
     param (
-		[Parameter(
-			Mandatory=$true,
-			Position=0,
-			ValueFromPipeline=$true,
-			HelpMessage='Исходный .tiff файл (объект).'
-		)]
+        [Parameter(
+            Mandatory=$true,
+            Position=0,
+            ValueFromPipeline=$true,
+            HelpMessage='Исходный .tiff файл (объект).'
+        )]
         [System.IO.FileInfo] $sourceFile
-		, [Parameter(
-			Mandatory=$false,
-			Position=1,
-			ValueFromPipeline=$false,
-			HelpMessage='Полный путь (к папке), в который будет сохранён полученный .tiff файл.'
-		)]
+        , [Parameter(
+            Mandatory=$false,
+            Position=1,
+            ValueFromPipeline=$false,
+            HelpMessage='Полный путь (к папке), в который будет сохранён полученный .tiff файл.'
+        )]
         [System.IO.DirectoryInfo] $destination = ($sourceFile.Directory)
-		, [Parameter(
-			Mandatory=$false,
-			Position=2,
-			ValueFromPipeline=$false,
-			HelpMessage='Имя создаваемого файла.'
-		)]
-  		[string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.tif')
+        , [Parameter(
+            Mandatory=$false,
+            Position=2,
+            ValueFromPipeline=$false,
+            HelpMessage='Имя создаваемого файла.'
+        )]
+          [string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.tif')
         , [switch] $PassThru
-	)
+    )
 
     process {
         $sourceStream = new-object -typeName System.IO.FileStream -argumentList `
@@ -96,49 +96,49 @@ function Copy-Tiff2Tiff {
 };  
 
 function Copy-Tiff2TiffBlackWhite {
-	<#
-		.Synopsis
-		    Преобразует TIFF файл в монохромный TIFF
-		.Description
-		    Преобразует TIFF файл в монохромный TIFF
-		.Parameter sourceFile
-		    Исходный файл (объект).
-		.Parameter destination
-			Полный путь (к папке), в который будет сохранён полученный .tiff файл.
+    <#
+        .Synopsis
+            Преобразует TIFF файл в монохромный TIFF
+        .Description
+            Преобразует TIFF файл в монохромный TIFF
+        .Parameter sourceFile
+            Исходный файл (объект).
+        .Parameter destination
+            Полный путь (к папке), в который будет сохранён полученный .tiff файл.
             Если параметр не указан, будет создан файл с тем же именем
             в каталоге исходного файла
-		.Parameter newName
+        .Parameter newName
             Имя создаваемого файла.
-			Если параметр не указан, будет создан файл с тем же именем
-		.Example
-			Обработка файлов каталога с их перезаписью "на месте":
-			dir 'c:\temp\*.tif' | Convert-Tiff2TiffBlackWhite
-	#>
+            Если параметр не указан, будет создан файл с тем же именем
+        .Example
+            Обработка файлов каталога с их перезаписью "на месте":
+            dir 'c:\temp\*.tif' | Convert-Tiff2TiffBlackWhite
+    #>
     
     param (
-		[Parameter(
-			Mandatory=$true,
-			Position=0,
-			ValueFromPipeline=$true,
-			HelpMessage='Исходный файл (объект).'
-		)]
+        [Parameter(
+            Mandatory=$true,
+            Position=0,
+            ValueFromPipeline=$true,
+            HelpMessage='Исходный файл (объект).'
+        )]
         [System.IO.FileInfo] $sourceFile
-		, [Parameter(
-			Mandatory=$false,
-			Position=1,
-			ValueFromPipeline=$false,
-			HelpMessage='Полный путь (к папке), в который будет сохранён полученный файл.'
-		)]
+        , [Parameter(
+            Mandatory=$false,
+            Position=1,
+            ValueFromPipeline=$false,
+            HelpMessage='Полный путь (к папке), в который будет сохранён полученный файл.'
+        )]
         [System.IO.DirectoryInfo] $destination = ($sourceFile.Directory)
-		, [Parameter(
-			Mandatory=$false,
-			Position=2,
-			ValueFromPipeline=$false,
-			HelpMessage='Имя создаваемого файла.'
-		)]
-  		[string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.tif')
+        , [Parameter(
+            Mandatory=$false,
+            Position=2,
+            ValueFromPipeline=$false,
+            HelpMessage='Имя создаваемого файла.'
+        )]
+          [string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.tif')
         , [switch] $PassThru
-	)
+    )
     
     process {
         $sourceStream = new-object -typeName System.IO.FileStream -argumentList `

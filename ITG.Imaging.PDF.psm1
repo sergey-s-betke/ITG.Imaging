@@ -3,49 +3,49 @@ add-type -assembly 'PresentationCore';
 add-type -path (join-path -path $PSScriptRoot -childPath 'PDFsharp\PdfSharp-WPF.dll');
 
 function Copy-Tiff2PDF {
-	<#
-		.Synopsis
-		    Преобразует TIFF файл в PDF
-		.Description
-		    Преобразует TIFF файл в PDF
-		.Parameter sourceFile
-		    Исходный файл (объект).
-		.Parameter destination
-			Полный путь (к папке), в который будет сохранён полученный файл.
+    <#
+        .Synopsis
+            Преобразует TIFF файл в PDF
+        .Description
+            Преобразует TIFF файл в PDF
+        .Parameter sourceFile
+            Исходный файл (объект).
+        .Parameter destination
+            Полный путь (к папке), в который будет сохранён полученный файл.
             Если параметр не указан, будет создан файл с тем же именем
             в каталоге исходного файла
-		.Parameter newName
+        .Parameter newName
             Имя создаваемого файла.
-			Если параметр не указан, будет создан файл с тем же именем
-		.Example
-			Обработка файлов каталога:
-			dir 'c:\temp\*.tif' | Copy-Tiff2PDF
-	#>
+            Если параметр не указан, будет создан файл с тем же именем
+        .Example
+            Обработка файлов каталога:
+            dir 'c:\temp\*.tif' | Copy-Tiff2PDF
+    #>
     
     param (
-		[Parameter(
-			Mandatory=$true,
-			Position=0,
-			ValueFromPipeline=$true,
-			HelpMessage='Исходный файл (объект).'
-		)]
+        [Parameter(
+            Mandatory=$true,
+            Position=0,
+            ValueFromPipeline=$true,
+            HelpMessage='Исходный файл (объект).'
+        )]
         [System.IO.FileInfo] $sourceFile
-		, [Parameter(
-			Mandatory=$false,
-			Position=1,
-			ValueFromPipeline=$false,
-			HelpMessage='Полный путь (к папке), в который будет сохранён полученный файл.'
-		)]
+        , [Parameter(
+            Mandatory=$false,
+            Position=1,
+            ValueFromPipeline=$false,
+            HelpMessage='Полный путь (к папке), в который будет сохранён полученный файл.'
+        )]
         [System.IO.DirectoryInfo] $destination = ($sourceFile.Directory)
-		, [Parameter(
-			Mandatory=$false,
-			Position=2,
-			ValueFromPipeline=$false,
-			HelpMessage='Имя создаваемого файла.'
-		)]
-  		[string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.pdf')
+        , [Parameter(
+            Mandatory=$false,
+            Position=2,
+            ValueFromPipeline=$false,
+            HelpMessage='Имя создаваемого файла.'
+        )]
+          [string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.pdf')
         , [switch] $PassThru
-	)
+    )
     
     process {
         $sourceStream = new-object -typeName System.IO.FileStream -argumentList `
