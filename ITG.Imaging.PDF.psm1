@@ -1,24 +1,24 @@
-add-type -assembly 'System.Drawing'; 
+п»їadd-type -assembly 'System.Drawing'; 
 add-type -assembly 'PresentationCore';
 add-type -path (join-path -path $PSScriptRoot -childPath 'PDFsharp\PdfSharp-WPF.dll');
 
 function Copy-Tiff2PDF {
 	<#
 		.Synopsis
-		    Преобразует TIFF файл в PDF
+		    РџСЂРµРѕР±СЂР°Р·СѓРµС‚ TIFF С„Р°Р№Р» РІ PDF
 		.Description
-		    Преобразует TIFF файл в PDF
+		    РџСЂРµРѕР±СЂР°Р·СѓРµС‚ TIFF С„Р°Р№Р» РІ PDF
 		.Parameter sourceFile
-		    Исходный файл (объект).
+		    РСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р» (РѕР±СЉРµРєС‚).
 		.Parameter destination
-			Полный путь (к папке), в который будет сохранён полученный файл.
-            Если параметр не указан, будет создан файл с тем же именем
-            в каталоге исходного файла
+			РџРѕР»РЅС‹Р№ РїСѓС‚СЊ (Рє РїР°РїРєРµ), РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅС‘РЅ РїРѕР»СѓС‡РµРЅРЅС‹Р№ С„Р°Р№Р».
+            Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С„Р°Р№Р» СЃ С‚РµРј Р¶Рµ РёРјРµРЅРµРј
+            РІ РєР°С‚Р°Р»РѕРіРµ РёСЃС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
 		.Parameter newName
-            Имя создаваемого файла.
-			Если параметр не указан, будет создан файл с тем же именем
+            РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°.
+			Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С„Р°Р№Р» СЃ С‚РµРј Р¶Рµ РёРјРµРЅРµРј
 		.Example
-			Обработка файлов каталога:
+			РћР±СЂР°Р±РѕС‚РєР° С„Р°Р№Р»РѕРІ РєР°С‚Р°Р»РѕРіР°:
 			dir 'c:\temp\*.tif' | Copy-Tiff2PDF
 	#>
     
@@ -27,21 +27,21 @@ function Copy-Tiff2PDF {
 			Mandatory=$true,
 			Position=0,
 			ValueFromPipeline=$true,
-			HelpMessage='Исходный файл (объект).'
+			HelpMessage='РСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р» (РѕР±СЉРµРєС‚).'
 		)]
         [System.IO.FileInfo] $sourceFile
 		, [Parameter(
 			Mandatory=$false,
 			Position=1,
 			ValueFromPipeline=$false,
-			HelpMessage='Полный путь (к папке), в который будет сохранён полученный файл.'
+			HelpMessage='РџРѕР»РЅС‹Р№ РїСѓС‚СЊ (Рє РїР°РїРєРµ), РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅС‘РЅ РїРѕР»СѓС‡РµРЅРЅС‹Р№ С„Р°Р№Р».'
 		)]
         [System.IO.DirectoryInfo] $destination = ($sourceFile.Directory)
 		, [Parameter(
 			Mandatory=$false,
 			Position=2,
 			ValueFromPipeline=$false,
-			HelpMessage='Имя создаваемого файла.'
+			HelpMessage='РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°.'
 		)]
   		[string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.pdf')
         , [switch] $PassThru

@@ -1,20 +1,20 @@
-function Copy-Mdi2Tiff { 
+п»їfunction Copy-Mdi2Tiff { 
 	<#
 		.Synopsis
-		    Преобразует MDI файл в TIFF формат
+		    РџСЂРµРѕР±СЂР°Р·СѓРµС‚ MDI С„Р°Р№Р» РІ TIFF С„РѕСЂРјР°С‚
 		.Description
-		    Преобразует MDI файл в TIFF формат
+		    РџСЂРµРѕР±СЂР°Р·СѓРµС‚ MDI С„Р°Р№Р» РІ TIFF С„РѕСЂРјР°С‚
 		.Parameter sourceFile
-		    Исходный .mdi файл (объект).
+		    РСЃС…РѕРґРЅС‹Р№ .mdi С„Р°Р№Р» (РѕР±СЉРµРєС‚).
 		.Parameter destination
-			Полный путь (к папке), в который будет сохранён полученный .tiff файл.
-            Если параметр не указан, будет создан файл с тем же именем, но с расширением .tiff
-            в каталоге исходного файла
+			РџРѕР»РЅС‹Р№ РїСѓС‚СЊ (Рє РїР°РїРєРµ), РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅС‘РЅ РїРѕР»СѓС‡РµРЅРЅС‹Р№ .tiff С„Р°Р№Р».
+            Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С„Р°Р№Р» СЃ С‚РµРј Р¶Рµ РёРјРµРЅРµРј, РЅРѕ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .tiff
+            РІ РєР°С‚Р°Р»РѕРіРµ РёСЃС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
 		.Parameter newName
-            Имя создаваемого файла.
-			Если параметр не указан, будет создан файл с тем же именем, но с расширением .tiff
+            РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°.
+			Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С„Р°Р№Р» СЃ С‚РµРј Р¶Рµ РёРјРµРЅРµРј, РЅРѕ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .tiff
 		.Example
-			Обработка файлов в каталоге с сохранением tiff файлов в тот же каталог:
+			РћР±СЂР°Р±РѕС‚РєР° С„Р°Р№Р»РѕРІ РІ РєР°С‚Р°Р»РѕРіРµ СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј tiff С„Р°Р№Р»РѕРІ РІ С‚РѕС‚ Р¶Рµ РєР°С‚Р°Р»РѕРі:
 			dir 'c:\temp\*.mdi' | Convert-MDI2TIFF
 	#>
     
@@ -23,21 +23,21 @@ function Copy-Mdi2Tiff {
 			Mandatory=$true,
 			Position=0,
 			ValueFromPipeline=$true,
-			HelpMessage='Исходный .mdi файл (объект).'
+			HelpMessage='РСЃС…РѕРґРЅС‹Р№ .mdi С„Р°Р№Р» (РѕР±СЉРµРєС‚).'
 		)]
         [System.IO.FileInfo] $sourceFile
 		, [Parameter(
 			Mandatory=$false,
 			Position=1,
 			ValueFromPipeline=$false,
-			HelpMessage='Полный путь (к папке), в который будет сохранён полученный .tiff файл.'
+			HelpMessage='РџРѕР»РЅС‹Р№ РїСѓС‚СЊ (Рє РїР°РїРєРµ), РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅС‘РЅ РїРѕР»СѓС‡РµРЅРЅС‹Р№ .tiff С„Р°Р№Р».'
 		)]
         [System.IO.DirectoryInfo] $destination = ($sourceFile.Directory)
 		, [Parameter(
 			Mandatory=$false,
 			Position=2,
 			ValueFromPipeline=$false,
-			HelpMessage='Имя создаваемого файла.'
+			HelpMessage='РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°.'
 		)]
   		[string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.tif')
         , [switch] $PassThru
@@ -49,7 +49,7 @@ function Copy-Mdi2Tiff {
         $mdiDoc.Create( $sourceFile.FullName );
         [System.IO.FileInfo] $tifFile = ( join-path -path $destination.Fullname -childPath $newName );
         $singlePage = ( $mdiDoc.Images.count -eq 1 );
-        $mdiDoc.SaveAs( $tifFile.FullName, 2, 0 ); ## обязательно - без потерь и без сжатия, чтобы не jpeg компрессия была
+        $mdiDoc.SaveAs( $tifFile.FullName, 2, 0 ); ## РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ - Р±РµР· РїРѕС‚РµСЂСЊ Рё Р±РµР· СЃР¶Р°С‚РёСЏ, С‡С‚РѕР±С‹ РЅРµ jpeg РєРѕРјРїСЂРµСЃСЃРёСЏ Р±С‹Р»Р°
         $mdiDoc.Close( $false );
         if ( $PassThru ) { $tifFile };
     }

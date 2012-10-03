@@ -1,23 +1,23 @@
-add-type -assembly 'System.Drawing'; 
+п»їadd-type -assembly 'System.Drawing'; 
 add-type -assembly 'PresentationCore';
 
 function Copy-Tiff2Tiff {
 	<#
 		.Synopsis
-		    "Исправляет" одностраничные TIFF файлы после mdi
+		    "РСЃРїСЂР°РІР»СЏРµС‚" РѕРґРЅРѕСЃС‚СЂР°РЅРёС‡РЅС‹Рµ TIFF С„Р°Р№Р»С‹ РїРѕСЃР»Рµ mdi
 		.Description
-		    "Исправляет" одностраничные TIFF файлы после mdi
+		    "РСЃРїСЂР°РІР»СЏРµС‚" РѕРґРЅРѕСЃС‚СЂР°РЅРёС‡РЅС‹Рµ TIFF С„Р°Р№Р»С‹ РїРѕСЃР»Рµ mdi
 		.Parameter sourceFile
-		    Исходный .tiff файл (объект).
+		    РСЃС…РѕРґРЅС‹Р№ .tiff С„Р°Р№Р» (РѕР±СЉРµРєС‚).
 		.Parameter destination
-			Полный путь (к папке), в который будет сохранён полученный .tiff файл.
-            Если параметр не указан, будет создан файл с тем же именем, но с расширением .tiff
-            в каталоге исходного файла
+			РџРѕР»РЅС‹Р№ РїСѓС‚СЊ (Рє РїР°РїРєРµ), РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅС‘РЅ РїРѕР»СѓС‡РµРЅРЅС‹Р№ .tiff С„Р°Р№Р».
+            Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С„Р°Р№Р» СЃ С‚РµРј Р¶Рµ РёРјРµРЅРµРј, РЅРѕ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .tiff
+            РІ РєР°С‚Р°Р»РѕРіРµ РёСЃС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
 		.Parameter newName
-            Имя создаваемого файла.
-			Если параметр не указан, будет создан файл с тем же именем, но с расширением .tiff
+            РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°.
+			Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С„Р°Р№Р» СЃ С‚РµРј Р¶Рµ РёРјРµРЅРµРј, РЅРѕ СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј .tiff
 		.Example
-			Обработка файлов в каталоге с сохранением tiff файлов в тот же каталог:
+			РћР±СЂР°Р±РѕС‚РєР° С„Р°Р№Р»РѕРІ РІ РєР°С‚Р°Р»РѕРіРµ СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј tiff С„Р°Р№Р»РѕРІ РІ С‚РѕС‚ Р¶Рµ РєР°С‚Р°Р»РѕРі:
 			dir 'c:\temp\*.tif' | Convert-TIFF2TIFF
 	#>
     
@@ -26,21 +26,21 @@ function Copy-Tiff2Tiff {
 			Mandatory=$true,
 			Position=0,
 			ValueFromPipeline=$true,
-			HelpMessage='Исходный .tiff файл (объект).'
+			HelpMessage='РСЃС…РѕРґРЅС‹Р№ .tiff С„Р°Р№Р» (РѕР±СЉРµРєС‚).'
 		)]
         [System.IO.FileInfo] $sourceFile
 		, [Parameter(
 			Mandatory=$false,
 			Position=1,
 			ValueFromPipeline=$false,
-			HelpMessage='Полный путь (к папке), в который будет сохранён полученный .tiff файл.'
+			HelpMessage='РџРѕР»РЅС‹Р№ РїСѓС‚СЊ (Рє РїР°РїРєРµ), РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅС‘РЅ РїРѕР»СѓС‡РµРЅРЅС‹Р№ .tiff С„Р°Р№Р».'
 		)]
         [System.IO.DirectoryInfo] $destination = ($sourceFile.Directory)
 		, [Parameter(
 			Mandatory=$false,
 			Position=2,
 			ValueFromPipeline=$false,
-			HelpMessage='Имя создаваемого файла.'
+			HelpMessage='РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°.'
 		)]
   		[string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.tif')
         , [switch] $PassThru
@@ -98,20 +98,20 @@ function Copy-Tiff2Tiff {
 function Copy-Tiff2TiffBlackWhite {
 	<#
 		.Synopsis
-		    Преобразует TIFF файл в монохромный TIFF
+		    РџСЂРµРѕР±СЂР°Р·СѓРµС‚ TIFF С„Р°Р№Р» РІ РјРѕРЅРѕС…СЂРѕРјРЅС‹Р№ TIFF
 		.Description
-		    Преобразует TIFF файл в монохромный TIFF
+		    РџСЂРµРѕР±СЂР°Р·СѓРµС‚ TIFF С„Р°Р№Р» РІ РјРѕРЅРѕС…СЂРѕРјРЅС‹Р№ TIFF
 		.Parameter sourceFile
-		    Исходный файл (объект).
+		    РСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р» (РѕР±СЉРµРєС‚).
 		.Parameter destination
-			Полный путь (к папке), в который будет сохранён полученный .tiff файл.
-            Если параметр не указан, будет создан файл с тем же именем
-            в каталоге исходного файла
+			РџРѕР»РЅС‹Р№ РїСѓС‚СЊ (Рє РїР°РїРєРµ), РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅС‘РЅ РїРѕР»СѓС‡РµРЅРЅС‹Р№ .tiff С„Р°Р№Р».
+            Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С„Р°Р№Р» СЃ С‚РµРј Р¶Рµ РёРјРµРЅРµРј
+            РІ РєР°С‚Р°Р»РѕРіРµ РёСЃС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
 		.Parameter newName
-            Имя создаваемого файла.
-			Если параметр не указан, будет создан файл с тем же именем
+            РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°.
+			Р•СЃР»Рё РїР°СЂР°РјРµС‚СЂ РЅРµ СѓРєР°Р·Р°РЅ, Р±СѓРґРµС‚ СЃРѕР·РґР°РЅ С„Р°Р№Р» СЃ С‚РµРј Р¶Рµ РёРјРµРЅРµРј
 		.Example
-			Обработка файлов каталога с их перезаписью "на месте":
+			РћР±СЂР°Р±РѕС‚РєР° С„Р°Р№Р»РѕРІ РєР°С‚Р°Р»РѕРіР° СЃ РёС… РїРµСЂРµР·Р°РїРёСЃСЊСЋ "РЅР° РјРµСЃС‚Рµ":
 			dir 'c:\temp\*.tif' | Convert-Tiff2TiffBlackWhite
 	#>
     
@@ -120,21 +120,21 @@ function Copy-Tiff2TiffBlackWhite {
 			Mandatory=$true,
 			Position=0,
 			ValueFromPipeline=$true,
-			HelpMessage='Исходный файл (объект).'
+			HelpMessage='РСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р» (РѕР±СЉРµРєС‚).'
 		)]
         [System.IO.FileInfo] $sourceFile
 		, [Parameter(
 			Mandatory=$false,
 			Position=1,
 			ValueFromPipeline=$false,
-			HelpMessage='Полный путь (к папке), в который будет сохранён полученный файл.'
+			HelpMessage='РџРѕР»РЅС‹Р№ РїСѓС‚СЊ (Рє РїР°РїРєРµ), РІ РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅС‘РЅ РїРѕР»СѓС‡РµРЅРЅС‹Р№ С„Р°Р№Р».'
 		)]
         [System.IO.DirectoryInfo] $destination = ($sourceFile.Directory)
 		, [Parameter(
 			Mandatory=$false,
 			Position=2,
 			ValueFromPipeline=$false,
-			HelpMessage='Имя создаваемого файла.'
+			HelpMessage='РРјСЏ СЃРѕР·РґР°РІР°РµРјРѕРіРѕ С„Р°Р№Р»Р°.'
 		)]
   		[string] $newName = ([System.IO.Path]::GetFileNameWithoutExtension($sourceFile.name) + '.tif')
         , [switch] $PassThru
