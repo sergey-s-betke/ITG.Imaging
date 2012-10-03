@@ -1,4 +1,4 @@
-function Copy-Mdi2Tiff {
+function Copy-Mdi2Tiff { 
 	<#
 		.Synopsis
 		    Преобразует MDI файл в TIFF формат

@@ -1,4 +1,4 @@
-add-type -assembly 'System.Drawing';
+add-type -assembly 'System.Drawing'; 
 add-type -assembly 'PresentationCore';
 add-type -path (join-path -path $PSScriptRoot -childPath 'PDFsharp\PdfSharp-WPF.dll');
 

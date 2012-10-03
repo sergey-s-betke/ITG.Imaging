@@ -1,4 +1,4 @@
-add-type -assembly 'System.Drawing';
+add-type -assembly 'System.Drawing'; 
 add-type -assembly 'PresentationCore';
 
 function Copy-Tiff2Tiff {
